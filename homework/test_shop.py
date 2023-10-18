@@ -48,14 +48,16 @@ class TestCart:
     def test_add_product(self, cart, product):
         cart.add_product(product, 2)
 
-        assert cart.products == 2
+        assert cart.products[product] == 2
 
     def test_remove_product(self, cart, product):
         cart.clear()
         cart.add_product(product, 2)
         cart.remove_product(product)
 
+
         assert cart.products == {}
+
 
         cart.clear()
         cart.add_product(product, 2)
@@ -67,7 +69,7 @@ class TestCart:
         cart.add_product(product, 2)
         cart.remove_product(product, 1)
 
-        assert cart.products == 1
+        assert cart.products[product] == 1
 
     def test_clear(self, cart):
         cart.clear()
@@ -76,7 +78,7 @@ class TestCart:
 
     def test_get_total_price(self, cart, product):
         cart.add_product(product,  1)
-        assert cart.products == 1
+        assert cart.products[product] == 1
         assert cart.get_total_price() == 100.0
 
 
@@ -86,9 +88,6 @@ class TestCart:
         cart.buy()
 
         assert cart.products == {}
-
-
-
 
 
 
