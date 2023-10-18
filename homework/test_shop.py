@@ -82,6 +82,13 @@ class TestCart:
 
 
     def test_buy(self, cart, product):
+        cart.add_product(product, 2)
+        cart.buy()
+
+        assert cart.products == {}
+
+
+
 
 
 
