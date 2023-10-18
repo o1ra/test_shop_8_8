@@ -70,7 +70,9 @@ class Cart:
         """
         if product in self.products:
             # Если remove_count не передан или больше или равен количеству в корзине, удалить всю позицию
-            if remove_count is None or remove_count >= self.products:
+            if remove_count is None:
+                del self.products
+            elif remove_count >= self.products:
                 del self.products
             else:
                 # Иначе уменьшаем количество продукта в корзине на указанное значение
