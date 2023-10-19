@@ -71,6 +71,11 @@ class TestCart:
 
         assert cart.products[product] == 1
 
+        cart.add_product(product, 5)
+        cart.remove_product(product, 5)
+
+        assert cart.products == {}
+
     def test_clear(self, cart):
         cart.clear()
 
@@ -89,8 +94,13 @@ class TestCart:
 
         assert cart.products == {}
 
+        # тест на проверку ошибки с оплатой
+        cart.add_product(product, 1010)
+        with pytest.raises(ValueError) as exc_info:
+            cart.buy()
 
-
+        assert exc_info.type is ValueError
+        assert exc_info.value.args[0] == "Данного товара нет в наличии"
 
 
 
