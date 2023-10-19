@@ -10,6 +10,7 @@ from homework.models import Product, Cart
 def product():
     return Product("book", 100, "This is a book", 1000)
 
+
 @pytest.fixture()
 def cart():
     return Cart()
@@ -30,7 +31,6 @@ class TestProducts:
         product.buy(10)
         assert product.quantity == 990
 
-
     def test_product_buy_more_than_available(self, product):
         with pytest.raises(ValueError) as exc_info:
             product.buy(product.quantity + 1)
@@ -45,6 +45,7 @@ class TestCart:
         На некоторые методы у вас может быть несколько тестов.
         Например, негативные тесты, ожидающие ошибку (используйте pytest.raises, чтобы проверить это)
     """
+
     def test_add_product(self, cart, product):
         cart.add_product(product, 2)
 
@@ -55,16 +56,13 @@ class TestCart:
         cart.add_product(product, 2)
         cart.remove_product(product)
 
-
         assert cart.products == {}
-
 
         cart.clear()
         cart.add_product(product, 2)
         cart.remove_product(product, 5)
 
         assert cart.products == {}
-
 
         cart.add_product(product, 2)
         cart.remove_product(product, 1)
@@ -82,11 +80,9 @@ class TestCart:
         assert cart.products == {}
 
     def test_get_total_price(self, cart, product):
-        cart.add_product(product,  1)
+        cart.add_product(product, 1)
         assert cart.products[product] == 1
         assert cart.get_total_price() == 100.0
-
-
 
     def test_buy(self, cart, product):
         cart.add_product(product, 2)
@@ -101,7 +97,3 @@ class TestCart:
 
         assert exc_info.type is ValueError
         assert exc_info.value.args[0] == "Данного товара нет в наличии"
-
-
-
-

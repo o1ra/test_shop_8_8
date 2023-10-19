@@ -2,6 +2,7 @@ class Product:
     """
     Класс продукта
     """
+
     name: str
     price: float
     description: str
@@ -33,7 +34,7 @@ class Product:
         if self.check_quantity(quantity_buy):
             self.quantity -= quantity_buy
         else:
-            raise ValueError (f"Данного товара нет в наличии")
+            raise ValueError(f"Данного товара нет в наличии")
 
     def __hash__(self):
         return hash(self.name + self.description)
